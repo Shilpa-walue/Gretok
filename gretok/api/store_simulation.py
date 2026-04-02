@@ -1,7 +1,7 @@
 import frappe
 from frappe import _
 
-@frappe.whitelist(allow_guest=False)
+@frappe.whitelist(allow_guest=True)
 def store_simulation_data(data):
     """
     POST /api/method/<your_app>.api.store_simulation_data
