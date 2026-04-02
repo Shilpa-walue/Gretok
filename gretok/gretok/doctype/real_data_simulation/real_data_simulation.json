@@ -1,0 +1,326 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "naming_series:",
+  "creation": "2026-03-26 00:00:00.000000",
+  "doctype": "DocType",
+  "document_type": "Document",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "timestamp",
+    "system_mode",
+    "inverter_status",
+    "section_power_energy",
+    "solar_generation_kw",
+    "battery_charge_kw",
+    "battery_discharge_kw",
+    "active_power_export_kw",
+    "auxiliary_consumption_kw",
+    "col_break_power",
+    "grid_export_kwh",
+    "grid_import_kwh",
+    "round_trip_efficiency_pct",
+    "system_availability_pct",
+    "section_battery_state",
+    "battery_soc_pct",
+    "battery_rated_capacity_kwh",
+    "battery_available_capacity_kwh",
+    "depth_of_discharge_pct",
+    "col_break_battery",
+    "battery_soh_pct",
+    "battery_cycle_count",
+    "bms_alarm_flag",
+    "section_environmental",
+    "solar_irradiance_wm2",
+    "ambient_temp_c",
+    "battery_cell_temp_c",
+    "col_break_env",
+    "wind_speed_ms",
+    "inverter_temp_c",
+    "section_grid_interface",
+    "power_factor",
+    "grid_voltage_v",
+    "grid_frequency_hz",
+    "reactive_power_kvar"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "RDS-.YYYY.-.MM.-.DD.-.###",
+      "reqd": 1,
+      "set_only_once": 1
+    },
+    {
+      "fieldname": "timestamp",
+      "fieldtype": "Datetime",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Timestamp",
+      "reqd": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "system_mode",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "System Mode",
+      "options": "\nCHARGE\nDISCHARGE\nIDLE\nFAULT",
+      "reqd": 1
+    },
+    {
+      "fieldname": "inverter_status",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Inverter Status",
+      "options": "\nONLINE\nOFFLINE\nFAULT",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_power_energy",
+      "fieldtype": "Section Break",
+      "label": "⚡ Power & Energy"
+    },
+    {
+      "fieldname": "solar_generation_kw",
+      "fieldtype": "Float",
+      "label": "Solar Generation (kW)",
+      "reqd": 1,
+      "precision": "3"
+    },
+    {
+      "fieldname": "battery_charge_kw",
+      "fieldtype": "Float",
+      "label": "Battery Charge (kW)",
+      "reqd": 1,
+      "precision": "3"
+    },
+    {
+      "fieldname": "battery_discharge_kw",
+      "fieldtype": "Float",
+      "label": "Battery Discharge (kW)",
+      "reqd": 1,
+      "precision": "3"
+    },
+    {
+      "fieldname": "active_power_export_kw",
+      "fieldtype": "Float",
+      "label": "Active Power Export (kW)",
+      "reqd": 1,
+      "precision": "3"
+    },
+    {
+      "fieldname": "auxiliary_consumption_kw",
+      "fieldtype": "Float",
+      "label": "Auxiliary Consumption (kW)",
+      "reqd": 1,
+      "precision": "3"
+    },
+    {
+      "fieldname": "col_break_power",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "grid_export_kwh",
+      "fieldtype": "Float",
+      "label": "Grid Export (kWh)",
+      "reqd": 1,
+      "precision": "4"
+    },
+    {
+      "fieldname": "grid_import_kwh",
+      "fieldtype": "Float",
+      "label": "Grid Import (kWh)",
+      "reqd": 1,
+      "precision": "4"
+    },
+    {
+      "fieldname": "round_trip_efficiency_pct",
+      "fieldtype": "Float",
+      "label": "Round Trip Efficiency (%)",
+      "reqd": 1,
+      "precision": "2",
+      "default": "90"
+    },
+    {
+      "fieldname": "system_availability_pct",
+      "fieldtype": "Float",
+      "label": "System Availability (%)",
+      "reqd": 1,
+      "precision": "2"
+    },
+    {
+      "fieldname": "section_battery_state",
+      "fieldtype": "Section Break",
+      "label": "🔋 Battery State"
+    },
+    {
+      "fieldname": "battery_soc_pct",
+      "fieldtype": "Float",
+      "label": "Battery SoC (%)",
+      "reqd": 1,
+      "precision": "2"
+    },
+    {
+      "fieldname": "battery_rated_capacity_kwh",
+      "fieldtype": "Float",
+      "label": "Rated Capacity (kWh)",
+      "reqd": 1,
+      "precision": "2"
+    },
+    {
+      "fieldname": "battery_available_capacity_kwh",
+      "fieldtype": "Float",
+      "label": "Available Capacity (kWh)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "depth_of_discharge_pct",
+      "fieldtype": "Float",
+      "label": "Depth of Discharge (%)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "col_break_battery",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "battery_soh_pct",
+      "fieldtype": "Float",
+      "label": "Battery SoH (%)",
+      "precision": "2"
+    },
+    {
+      "fieldname": "battery_cycle_count",
+      "fieldtype": "Int",
+      "label": "Cycle Count",
+      "default": "0"
+    },
+    {
+      "fieldname": "bms_alarm_flag",
+      "fieldtype": "Check",
+      "label": "BMS Alarm Flag",
+      "default": "0"
+    },
+    {
+      "fieldname": "section_environmental",
+      "fieldtype": "Section Break",
+      "label": "🌤 Environmental & Thermal"
+    },
+    {
+      "fieldname": "solar_irradiance_wm2",
+      "fieldtype": "Float",
+      "label": "Solar Irradiance (W/m²)",
+      "reqd": 1,
+      "precision": "2"
+    },
+    {
+      "fieldname": "ambient_temp_c",
+      "fieldtype": "Float",
+      "label": "Ambient Temperature (°C)",
+      "reqd": 1,
+      "precision": "1"
+    },
+    {
+      "fieldname": "battery_cell_temp_c",
+      "fieldtype": "Float",
+      "label": "Battery Cell Temp (°C)",
+      "precision": "1"
+    },
+    {
+      "fieldname": "col_break_env",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "wind_speed_ms",
+      "fieldtype": "Float",
+      "label": "Wind Speed (m/s)",
+      "precision": "1"
+    },
+    {
+      "fieldname": "inverter_temp_c",
+      "fieldtype": "Float",
+      "label": "Inverter Temp (°C)",
+      "precision": "1"
+    },
+    {
+      "fieldname": "section_grid_interface",
+      "fieldtype": "Section Break",
+      "label": "🔌 Grid Interface"
+    },
+    {
+      "fieldname": "power_factor",
+      "fieldtype": "Float",
+      "label": "Power Factor",
+      "precision": "3",
+      "default": "0.97"
+    },
+    {
+      "fieldname": "grid_voltage_v",
+      "fieldtype": "Float",
+      "label": "Grid Voltage (V)",
+      "precision": "1",
+      "default": "11000"
+    },
+    {
+      "fieldname": "grid_frequency_hz",
+      "fieldtype": "Float",
+      "label": "Grid Frequency (Hz)",
+      "precision": "2",
+      "default": "50"
+    },
+    {
+      "fieldname": "reactive_power_kvar",
+      "fieldtype": "Float",
+      "label": "Reactive Power (kVAR)",
+      "precision": "3"
+    }
+  ],
+  "icon": "fa fa-bolt",
+  "index_web_pages_for_search": 0,
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-03-26 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Gretok",
+  "name": "Real Data Simulation",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 0,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "All",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "timestamp",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}
