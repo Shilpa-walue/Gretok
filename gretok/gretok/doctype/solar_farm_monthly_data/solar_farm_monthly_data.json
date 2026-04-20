@@ -1,0 +1,218 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "SF-PM-001",
+ "creation": "2026-04-20 21:26:28.392480",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "column_break_pjrc",
+  "reporting_month",
+  "section_meter_readings",
+  "opening_meter_reading_kwh",
+  "opening_reading_datetime",
+  "closing_meter_reading_kwh",
+  "closing_reading_datetime",
+  "col_break_readings",
+  "utility_representative_name",
+  "company_representative_name",
+  "meter_photo_evidence",
+  "section_energy",
+  "gross_energy_generated_kwh",
+  "net_energy_exported_kwh",
+  "auxiliary_consumption_kwh",
+  "grid_curtailment_energy_lost_kwh",
+  "col_break_energy",
+  "plant_operational_days",
+  "planned_downtime_hours",
+  "unplanned_downtime_hours",
+  "section_calculated",
+  "actual_performance_ratio",
+  "actual_capacity_utilization_factor",
+  "column_break_kswl",
+  "system_availability"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Solar Farm Project",
+   "options": "Solar Farm Project",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reporting_month",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Reporting Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_meter_readings",
+   "fieldtype": "Section Break",
+   "label": "Meter Readings"
+  },
+  {
+   "fieldname": "opening_meter_reading_kwh",
+   "fieldtype": "Float",
+   "label": "Opening Meter Reading (kWh)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "opening_reading_datetime",
+   "fieldtype": "Datetime",
+   "label": "Opening Reading Date and Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "closing_meter_reading_kwh",
+   "fieldtype": "Float",
+   "label": "Closing Meter Reading (kWh)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "closing_reading_datetime",
+   "fieldtype": "Datetime",
+   "label": "Closing Reading Date and Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_break_readings",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "utility_representative_name",
+   "fieldtype": "Data",
+   "label": "Utility Representative Name"
+  },
+  {
+   "fieldname": "company_representative_name",
+   "fieldtype": "Data",
+   "label": "Company Representative Name"
+  },
+  {
+   "fieldname": "meter_photo_evidence",
+   "fieldtype": "Attach",
+   "label": "Meter Photo Evidence"
+  },
+  {
+   "fieldname": "section_energy",
+   "fieldtype": "Section Break",
+   "label": "Energy Data"
+  },
+  {
+   "fieldname": "gross_energy_generated_kwh",
+   "fieldtype": "Float",
+   "label": "Gross Energy Generated (kWh)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_energy_exported_kwh",
+   "fieldtype": "Float",
+   "label": "Net Energy Exported to Grid (kWh)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "auxiliary_consumption_kwh",
+   "fieldtype": "Float",
+   "label": "Auxiliary Consumption (kWh)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "grid_curtailment_energy_lost_kwh",
+   "fieldtype": "Float",
+   "label": "Grid Curtailment Energy Lost (kWh)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "col_break_energy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "plant_operational_days",
+   "fieldtype": "Int",
+   "label": "Plant Operational Days"
+  },
+  {
+   "fieldname": "planned_downtime_hours",
+   "fieldtype": "Float",
+   "label": "Planned Downtime Hours",
+   "precision": "2"
+  },
+  {
+   "fieldname": "unplanned_downtime_hours",
+   "fieldtype": "Float",
+   "label": "Unplanned Downtime Hours",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_calculated",
+   "fieldtype": "Section Break",
+   "label": "Calculated KPIs"
+  },
+  {
+   "fieldname": "actual_performance_ratio",
+   "fieldtype": "Float",
+   "label": "Actual Performance Ratio (%)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "actual_capacity_utilization_factor",
+   "fieldtype": "Float",
+   "label": "Actual Capacity Utilization Factor (%)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "system_availability",
+   "fieldtype": "Float",
+   "label": "System Availability (%)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_pjrc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_kswl",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-20 23:04:20.381243",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "Solar Farm Monthly Data",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "SF-RT-001",
+ "creation": "2026-04-20 21:39:14.325775",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "timestamp",
+  "column_break_ourf",
+  "inverter_status",
+  "grid_availability_flag",
+  "section_power",
+  "active_power_generation_kw",
+  "energy_generated_interval_kwh",
+  "column_break_2jrd",
+  "active_power_export_kw",
+  "grid_frequency_hz",
+  "section_environmental",
+  "solar_irradiance_ghi_wm2",
+  "module_temperature_c",
+  "col_break_env",
+  "ambient_temperature_c"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Solar Farm Project",
+   "options": "Solar Farm Project",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "timestamp",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Timestamp",
+   "reqd": 1
+  },
+  {
+   "fieldname": "inverter_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Inverter Status",
+   "options": "\nRUNNING\nSTANDBY\nFAULT\nOFFLINE",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "grid_availability_flag",
+   "fieldtype": "Check",
+   "label": "Grid Availability",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_power",
+   "fieldtype": "Section Break",
+   "label": "Power and Energy"
+  },
+  {
+   "fieldname": "active_power_generation_kw",
+   "fieldtype": "Float",
+   "label": "Active Power Generation AC (kW)",
+   "precision": "3",
+   "reqd": 1
+  },
+  {
+   "fieldname": "energy_generated_interval_kwh",
+   "fieldtype": "Float",
+   "label": "Energy Generated in Interval (kWh)",
+   "precision": "4",
+   "reqd": 1
+  },
+  {
+   "fieldname": "active_power_export_kw",
+   "fieldtype": "Float",
+   "label": "Active Power Export to Grid (kW)",
+   "precision": "3",
+   "reqd": 1
+  },
+  {
+   "default": "50",
+   "fieldname": "grid_frequency_hz",
+   "fieldtype": "Float",
+   "label": "Grid Frequency (Hz)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_environmental",
+   "fieldtype": "Section Break",
+   "label": "Environmental"
+  },
+  {
+   "fieldname": "solar_irradiance_ghi_wm2",
+   "fieldtype": "Float",
+   "label": "Solar Irradiance GHI (W/m2)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "module_temperature_c",
+   "fieldtype": "Float",
+   "label": "Module Temperature (C)",
+   "precision": "1"
+  },
+  {
+   "fieldname": "col_break_env",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ambient_temperature_c",
+   "fieldtype": "Float",
+   "label": "Ambient Temperature (C)",
+   "precision": "1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ourf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_2jrd",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-20 23:15:23.244413",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "Solar Farm RT Data",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:PRT-.####",
+ "creation": "2026-04-20 16:53:56.642807",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_jjm4",
+  "naming_series",
+  "organization_name",
+  "email_id",
+  "phone_number",
+  "total_partner_tokens",
+  "carbon_credits",
+  "wallet_address",
+  "column_break_s5w0",
+  "gtka",
+  "gtk",
+  "gtkcc",
+  "gtkgp",
+  "total_carbon_saved",
+  "asset_category",
+  "company_gst",
+  "company_pan"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_jjm4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series"
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "label": "Organization Name"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email Id"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "total_partner_tokens",
+   "fieldtype": "Float",
+   "label": "Total Partner Tokens"
+  },
+  {
+   "fieldname": "carbon_credits",
+   "fieldtype": "Float",
+   "label": "Carbon Credits"
+  },
+  {
+   "fieldname": "column_break_s5w0",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "wallet_address",
+   "fieldtype": "Data",
+   "label": "Wallet Address"
+  },
+  {
+   "fieldname": "gtka",
+   "fieldtype": "Data",
+   "label": "GTKA"
+  },
+  {
+   "fieldname": "gtk",
+   "fieldtype": "Data",
+   "label": "GTK"
+  },
+  {
+   "fieldname": "gtkcc",
+   "fieldtype": "Data",
+   "label": "GTKCC"
+  },
+  {
+   "fieldname": "gtkgp",
+   "fieldtype": "Data",
+   "label": "GTKGP"
+  },
+  {
+   "fieldname": "total_carbon_saved",
+   "fieldtype": "Data",
+   "label": "Total Carbon Saved"
+  },
+  {
+   "fieldname": "asset_category",
+   "fieldtype": "Data",
+   "label": "Asset Category"
+  },
+  {
+   "fieldname": "company_gst",
+   "fieldtype": "Data",
+   "label": "Company GST"
+  },
+  {
+   "fieldname": "company_pan",
+   "fieldtype": "Data",
+   "label": "Company PAN"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-20 18:05:29.505392",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "Partners",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

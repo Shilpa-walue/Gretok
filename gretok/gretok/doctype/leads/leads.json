@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:Lead-.####",
+ "creation": "2026-04-20 16:19:53.288027",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_hxlh",
+  "naming_series",
+  "organization_name",
+  "email_id",
+  "phone_number",
+  "status",
+  "section_break_eixd",
+  "project_name",
+  "project_description",
+  "project_type",
+  "project_specfic_data",
+  "asset_category",
+  "company_gst",
+  "company_pan"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_hxlh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series"
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "label": "Organization Name"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email Id"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "status",
+   "options": "Contacted\nPartnered\nDeclined"
+  },
+  {
+   "fieldname": "section_break_eixd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name"
+  },
+  {
+   "fieldname": "project_description",
+   "fieldtype": "Data",
+   "label": "Project Description"
+  },
+  {
+   "fieldname": "project_type",
+   "fieldtype": "Data",
+   "label": "Project Type"
+  },
+  {
+   "fieldname": "project_specfic_data",
+   "fieldtype": "Small Text",
+   "label": "Project Specfic Data"
+  },
+  {
+   "fieldname": "asset_category",
+   "fieldtype": "Data",
+   "label": "Asset Category"
+  },
+  {
+   "fieldname": "company_gst",
+   "fieldtype": "Data",
+   "label": "Company GST"
+  },
+  {
+   "fieldname": "company_pan",
+   "fieldtype": "Data",
+   "label": "Company PAN"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-20 18:04:35.783317",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "Leads",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

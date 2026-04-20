@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:Asset-.####",
+ "creation": "2026-04-20 17:42:16.247160",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_omiq",
+  "naming_series",
+  "project_name",
+  "project_description",
+  "project_carbon_tokens",
+  "partner_id",
+  "project_wallet_address",
+  "project_uuid",
+  "column_break_vlie",
+  "project_type",
+  "project_specfic_data",
+  "rewards_points",
+  "gtka_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_omiq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series"
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name"
+  },
+  {
+   "fieldname": "project_description",
+   "fieldtype": "Small Text",
+   "label": "Project Description"
+  },
+  {
+   "fieldname": "project_carbon_tokens",
+   "fieldtype": "Float",
+   "label": "Project Carbon Tokens"
+  },
+  {
+   "fieldname": "partner_id",
+   "fieldtype": "Link",
+   "label": "Partner ID",
+   "options": "Partners"
+  },
+  {
+   "fieldname": "column_break_vlie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project_wallet_address",
+   "fieldtype": "Data",
+   "label": "Project Wallet Address"
+  },
+  {
+   "fieldname": "project_uuid",
+   "fieldtype": "Data",
+   "label": "Project UUID"
+  },
+  {
+   "fieldname": "project_type",
+   "fieldtype": "Data",
+   "label": "Project Type"
+  },
+  {
+   "fieldname": "project_specfic_data",
+   "fieldtype": "Code",
+   "label": "Project Specfic Data"
+  },
+  {
+   "fieldname": "rewards_points",
+   "fieldtype": "Float",
+   "label": "Rewards Points"
+  },
+  {
+   "fieldname": "gtka_id",
+   "fieldtype": "Data",
+   "label": "GTKA ID"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-20 18:06:58.752921",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "Projects",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

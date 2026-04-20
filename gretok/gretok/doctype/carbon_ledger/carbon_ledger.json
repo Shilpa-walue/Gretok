@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:TT-.####",
+ "creation": "2026-04-20 17:53:10.117768",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_3cfl",
+  "from_wallet_address",
+  "from_project_name",
+  "to_wallet_address",
+  "to_project_name",
+  "total_carbon_saved",
+  "gtk",
+  "naming_series",
+  "column_break_o7ld",
+  "unit",
+  "token_mint_address",
+  "label",
+  "description",
+  "metadata_uri",
+  "to_project_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3cfl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "from_wallet_address",
+   "fieldtype": "Data",
+   "label": "From Wallet Address"
+  },
+  {
+   "fieldname": "from_project_name",
+   "fieldtype": "Data",
+   "label": "From Project Name"
+  },
+  {
+   "fieldname": "to_wallet_address",
+   "fieldtype": "Data",
+   "label": "To Wallet Address"
+  },
+  {
+   "fieldname": "to_project_name",
+   "fieldtype": "Data",
+   "label": "To Project Name"
+  },
+  {
+   "fieldname": "total_carbon_saved",
+   "fieldtype": "Int",
+   "label": "Total Carbon Saved"
+  },
+  {
+   "fieldname": "gtk",
+   "fieldtype": "Float",
+   "label": "GTK"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Data",
+   "label": "Naming Series"
+  },
+  {
+   "fieldname": "column_break_o7ld",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "token_mint_address",
+   "fieldtype": "Data",
+   "label": "Token Mint Address"
+  },
+  {
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "label": "Label"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "fieldname": "metadata_uri",
+   "fieldtype": "Data",
+   "label": "Metadata Uri"
+  },
+  {
+   "fieldname": "to_project_id",
+   "fieldtype": "Data",
+   "label": "To Project Id"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-20 18:06:16.765239",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "Carbon Ledger",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
