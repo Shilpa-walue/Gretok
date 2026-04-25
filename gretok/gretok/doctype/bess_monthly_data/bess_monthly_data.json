@@ -1,0 +1,194 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "BS-PM-.###",
+ "creation": "2026-04-21 13:16:11.369092",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "column_break_4sxr",
+  "reporting_month",
+  "section_energy",
+  "total_energy_charged_from_solar_kwh",
+  "total_energy_charged_from_grid_kwh",
+  "total_energy_discharged_to_grid_kwh",
+  "auxiliary_consumption_kwh",
+  "col_break_energy",
+  "actual_round_trip_efficiency_pct",
+  "number_of_full_equivalent_cycles",
+  "average_state_of_health_pct",
+  "section_availability",
+  "system_availability_pct",
+  "planned_downtime_hours",
+  "unplanned_downtime_hours",
+  "bms_alarm_events_count",
+  "col_break_availability",
+  "bms_alarm_types",
+  "section_curtailment",
+  "curtailment_duration_hours",
+  "column_break_tmha",
+  "curtailment_energy_lost_kwh"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "BESS Project",
+   "options": "BESS Project",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reporting_month",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Reporting Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_energy",
+   "fieldtype": "Section Break",
+   "label": "Energy Data"
+  },
+  {
+   "fieldname": "total_energy_charged_from_solar_kwh",
+   "fieldtype": "Float",
+   "label": "Total Energy Charged from Solar (kWh)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_energy_charged_from_grid_kwh",
+   "fieldtype": "Float",
+   "label": "Total Energy Charged from Grid (kWh)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "total_energy_discharged_to_grid_kwh",
+   "fieldtype": "Float",
+   "label": "Total Energy Discharged to Grid (kWh)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auxiliary_consumption_kwh",
+   "fieldtype": "Float",
+   "label": "Auxiliary Consumption (kWh)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "col_break_energy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "actual_round_trip_efficiency_pct",
+   "fieldtype": "Float",
+   "label": "Actual Round Trip Efficiency (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "number_of_full_equivalent_cycles",
+   "fieldtype": "Float",
+   "label": "Number of Full Equivalent Cycles",
+   "precision": "2"
+  },
+  {
+   "fieldname": "average_state_of_health_pct",
+   "fieldtype": "Float",
+   "label": "Average State of Health (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_availability",
+   "fieldtype": "Section Break",
+   "label": "Availability and Downtime"
+  },
+  {
+   "fieldname": "system_availability_pct",
+   "fieldtype": "Float",
+   "label": "System Availability (%)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "planned_downtime_hours",
+   "fieldtype": "Float",
+   "label": "Planned Downtime Hours",
+   "precision": "2"
+  },
+  {
+   "fieldname": "unplanned_downtime_hours",
+   "fieldtype": "Float",
+   "label": "Unplanned Downtime Hours",
+   "precision": "2"
+  },
+  {
+   "fieldname": "col_break_availability",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bms_alarm_events_count",
+   "fieldtype": "Int",
+   "label": "BMS Alarm Events Count"
+  },
+  {
+   "fieldname": "bms_alarm_types",
+   "fieldtype": "Small Text",
+   "label": "BMS Alarm Types"
+  },
+  {
+   "fieldname": "section_curtailment",
+   "fieldtype": "Section Break",
+   "label": "Curtailment Events"
+  },
+  {
+   "fieldname": "curtailment_duration_hours",
+   "fieldtype": "Float",
+   "label": "Curtailment Duration (Hours)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "curtailment_energy_lost_kwh",
+   "fieldtype": "Float",
+   "label": "Curtailment Energy Lost (kWh)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_4sxr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tmha",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-21 16:16:51.165067",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "BESS Monthly Data",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

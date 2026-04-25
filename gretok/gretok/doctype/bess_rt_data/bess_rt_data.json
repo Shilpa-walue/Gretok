@@ -1,0 +1,253 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "BS-RT-.###",
+ "creation": "2026-04-21 13:23:44.467459",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "timestamp",
+  "column_break_ijoo",
+  "system_operating_mode",
+  "pcs_inverter_status",
+  "system_availability_flag",
+  "section_battery_state",
+  "battery_soc_pct",
+  "battery_soh_pct",
+  "battery_cycle_count",
+  "battery_rated_capacity_kwh",
+  "col_break_battery_state",
+  "battery_charge_power_kw",
+  "battery_discharge_power_kw",
+  "round_trip_efficiency_interval_pct",
+  "section_energy",
+  "grid_export_energy_kwh",
+  "grid_import_energy_kwh",
+  "active_power_export_kw",
+  "col_break_energy",
+  "solar_generation_input_kw",
+  "auxiliary_consumption_kw",
+  "section_thermal",
+  "battery_cell_temp_avg_c",
+  "battery_cell_temp_max_c",
+  "col_break_thermal",
+  "ambient_temperature_c",
+  "solar_irradiance_ghi_wm2",
+  "section_alarms",
+  "bms_alarm_flag"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "BESS Project",
+   "options": "BESS Project",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "timestamp",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Timestamp",
+   "reqd": 1
+  },
+  {
+   "fieldname": "system_operating_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "System Operating Mode",
+   "options": "\nCHARGE\nDISCHARGE\nIDLE\nFAULT",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pcs_inverter_status",
+   "fieldtype": "Select",
+   "label": "PCS / Inverter Status",
+   "options": "\nONLINE\nOFFLINE\nFAULT",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "system_availability_flag",
+   "fieldtype": "Check",
+   "label": "System Availability Flag"
+  },
+  {
+   "fieldname": "section_battery_state",
+   "fieldtype": "Section Break",
+   "label": "Battery State"
+  },
+  {
+   "fieldname": "battery_soc_pct",
+   "fieldtype": "Float",
+   "label": "Battery SoC (%)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "battery_soh_pct",
+   "fieldtype": "Float",
+   "label": "Battery SoH (%)",
+   "precision": "2"
+  },
+  {
+   "default": "0",
+   "fieldname": "battery_cycle_count",
+   "fieldtype": "Int",
+   "label": "Battery Cycle Count"
+  },
+  {
+   "fieldname": "battery_rated_capacity_kwh",
+   "fieldtype": "Float",
+   "label": "Battery Rated Capacity (kWh)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_break_battery_state",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "battery_charge_power_kw",
+   "fieldtype": "Float",
+   "label": "Battery Charge Power (kW)",
+   "precision": "3"
+  },
+  {
+   "fieldname": "battery_discharge_power_kw",
+   "fieldtype": "Float",
+   "label": "Battery Discharge Power (kW)",
+   "precision": "3"
+  },
+  {
+   "fieldname": "round_trip_efficiency_interval_pct",
+   "fieldtype": "Float",
+   "label": "Round Trip Efficiency Interval (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_energy",
+   "fieldtype": "Section Break",
+   "label": "Energy and Power"
+  },
+  {
+   "fieldname": "grid_export_energy_kwh",
+   "fieldtype": "Float",
+   "label": "Grid Export Energy (kWh)",
+   "precision": "4",
+   "reqd": 1
+  },
+  {
+   "fieldname": "grid_import_energy_kwh",
+   "fieldtype": "Float",
+   "label": "Grid Import Energy (kWh)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "active_power_export_kw",
+   "fieldtype": "Float",
+   "label": "Active Power Export to Grid (kW)",
+   "precision": "3",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_break_energy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "solar_generation_input_kw",
+   "fieldtype": "Float",
+   "label": "Solar Generation Input (kW)",
+   "precision": "3"
+  },
+  {
+   "fieldname": "auxiliary_consumption_kw",
+   "fieldtype": "Float",
+   "label": "Auxiliary Consumption (kW)",
+   "precision": "3"
+  },
+  {
+   "fieldname": "section_thermal",
+   "fieldtype": "Section Break",
+   "label": "Thermal and Environmental"
+  },
+  {
+   "fieldname": "battery_cell_temp_avg_c",
+   "fieldtype": "Float",
+   "label": "Battery Cell Temp Average (C)",
+   "precision": "1"
+  },
+  {
+   "fieldname": "battery_cell_temp_max_c",
+   "fieldtype": "Float",
+   "label": "Battery Cell Temp Maximum (C)",
+   "precision": "1"
+  },
+  {
+   "fieldname": "ambient_temperature_c",
+   "fieldtype": "Float",
+   "label": "Ambient Temperature (C)",
+   "precision": "1",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_break_thermal",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "solar_irradiance_ghi_wm2",
+   "fieldtype": "Float",
+   "label": "Solar Irradiance GHI (W/m2)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_alarms",
+   "fieldtype": "Section Break",
+   "label": "Alarms"
+  },
+  {
+   "default": "0",
+   "fieldname": "bms_alarm_flag",
+   "fieldtype": "Check",
+   "label": "BMS Alarm Flag"
+  },
+  {
+   "fieldname": "column_break_ijoo",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-21 16:24:13.633691",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "BESS RT Data",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

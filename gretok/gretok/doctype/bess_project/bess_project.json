@@ -1,0 +1,393 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "BS-PC-.###",
+ "creation": "2026-04-21 13:03:27.456595",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "project_name",
+  "bess_configuration",
+  "coupled_project_reference",
+  "commission_date",
+  "column_break_q2dl",
+  "crediting_period_start_date",
+  "crediting_period_end_date",
+  "applicable_methodology",
+  "bess_operating_mode",
+  "section_location",
+  "location_state",
+  "location_district",
+  "column_break_qp2z",
+  "gps_latitude",
+  "gps_longitude",
+  "section_registration",
+  "verra_gs_registry_project_id",
+  "cerc_cea_registration_number",
+  "discom_interconnection_agreement_no",
+  "col_break_registration",
+  "grid_emission_factor",
+  "emission_factor_reference_year",
+  "section_battery",
+  "battery_technology",
+  "battery_manufacturer",
+  "battery_cell_model",
+  "rated_energy_capacity_kwh",
+  "rated_power_output_kw",
+  "col_break_battery",
+  "c_rate",
+  "number_of_battery_racks",
+  "design_round_trip_efficiency_pct",
+  "design_depth_of_discharge_pct",
+  "design_soh_at_end_of_life_pct",
+  "battery_thermal_management_type",
+  "section_pcs",
+  "pcs_rated_power_kw",
+  "pcs_efficiency_pct",
+  "number_of_pcs_units",
+  "ac_connection_voltage_kv",
+  "col_break_pcs",
+  "bms_manufacturer_model",
+  "ems_scada_system",
+  "data_logger_sampling_frequency_mins",
+  "section_grid",
+  "grid_substation_name",
+  "col_break_grid",
+  "grid_connection_voltage_kv",
+  "section_metering",
+  "revenue_meter_serial_number",
+  "revenue_meter_accuracy_class",
+  "column_break_qcqc",
+  "revenue_meter_ownership",
+  "revenue_meter_calibration_date"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bess_configuration",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "BESS Configuration",
+   "options": "\nCoupled with Renewable\nStandalone Grid-Connected",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.bess_configuration == 'Coupled with Renewable'",
+   "fieldname": "coupled_project_reference",
+   "fieldtype": "Link",
+   "label": "Coupled Project Reference",
+   "options": "Solar Farm Project"
+  },
+  {
+   "fieldname": "commission_date",
+   "fieldtype": "Date",
+   "label": "Commission Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crediting_period_start_date",
+   "fieldtype": "Date",
+   "label": "Crediting Period Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crediting_period_end_date",
+   "fieldtype": "Date",
+   "label": "Crediting Period End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "applicable_methodology",
+   "fieldtype": "Data",
+   "label": "Applicable Methodology"
+  },
+  {
+   "fieldname": "bess_operating_mode",
+   "fieldtype": "Select",
+   "label": "BESS Operating Mode",
+   "options": "\nPeak Shaving\nFrequency Regulation\nEnergy Arbitrage\nRenewable Firming\nAncillary Services"
+  },
+  {
+   "fieldname": "section_location",
+   "fieldtype": "Section Break",
+   "label": "Location"
+  },
+  {
+   "fieldname": "location_state",
+   "fieldtype": "Data",
+   "label": "State",
+   "reqd": 1
+  },
+  {
+   "fieldname": "location_district",
+   "fieldtype": "Data",
+   "label": "District",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gps_latitude",
+   "fieldtype": "Float",
+   "label": "GPS Latitude",
+   "precision": "6",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gps_longitude",
+   "fieldtype": "Float",
+   "label": "GPS Longitude",
+   "precision": "6",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_registration",
+   "fieldtype": "Section Break",
+   "label": "Registration and Compliance"
+  },
+  {
+   "fieldname": "verra_gs_registry_project_id",
+   "fieldtype": "Data",
+   "label": "Verra / GS Registry Project ID"
+  },
+  {
+   "fieldname": "cerc_cea_registration_number",
+   "fieldtype": "Data",
+   "label": "CERC / CEA Registration Number"
+  },
+  {
+   "fieldname": "discom_interconnection_agreement_no",
+   "fieldtype": "Data",
+   "label": "DISCOM Interconnection Agreement No"
+  },
+  {
+   "fieldname": "col_break_registration",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grid_emission_factor",
+   "fieldtype": "Float",
+   "label": "Grid Emission Factor (tCO2/MWh)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "emission_factor_reference_year",
+   "fieldtype": "Int",
+   "label": "Emission Factor Reference Year"
+  },
+  {
+   "fieldname": "section_battery",
+   "fieldtype": "Section Break",
+   "label": "Battery Specifications"
+  },
+  {
+   "fieldname": "battery_technology",
+   "fieldtype": "Select",
+   "label": "Battery Technology",
+   "options": "\nLFP\nNMC\nNCA\nNa-ion\nZinc-Bromide Flow\nVanadium Flow",
+   "reqd": 1
+  },
+  {
+   "fieldname": "battery_manufacturer",
+   "fieldtype": "Data",
+   "label": "Battery Manufacturer"
+  },
+  {
+   "fieldname": "battery_cell_model",
+   "fieldtype": "Data",
+   "label": "Battery Cell Model"
+  },
+  {
+   "fieldname": "rated_energy_capacity_kwh",
+   "fieldtype": "Float",
+   "label": "Rated Energy Capacity (kWh)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rated_power_output_kw",
+   "fieldtype": "Float",
+   "label": "Rated Power Output (kW)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_break_battery",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "c_rate",
+   "fieldtype": "Float",
+   "label": "C-Rate",
+   "precision": "2"
+  },
+  {
+   "fieldname": "number_of_battery_racks",
+   "fieldtype": "Int",
+   "label": "Number of Battery Racks"
+  },
+  {
+   "fieldname": "design_round_trip_efficiency_pct",
+   "fieldtype": "Float",
+   "label": "Design Round Trip Efficiency (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "design_depth_of_discharge_pct",
+   "fieldtype": "Float",
+   "label": "Design Depth of Discharge (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "design_soh_at_end_of_life_pct",
+   "fieldtype": "Float",
+   "label": "Design SoH at End of Life (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "battery_thermal_management_type",
+   "fieldtype": "Select",
+   "label": "Battery Thermal Management Type",
+   "options": "\nAir Cooling\nLiquid Cooling\nPhase Change Material"
+  },
+  {
+   "fieldname": "section_pcs",
+   "fieldtype": "Section Break",
+   "label": "PCS and Control Systems"
+  },
+  {
+   "fieldname": "pcs_rated_power_kw",
+   "fieldtype": "Float",
+   "label": "PCS Rated Power (kW)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "pcs_efficiency_pct",
+   "fieldtype": "Float",
+   "label": "PCS Efficiency (%)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "number_of_pcs_units",
+   "fieldtype": "Int",
+   "label": "Number of PCS Units"
+  },
+  {
+   "fieldname": "ac_connection_voltage_kv",
+   "fieldtype": "Data",
+   "label": "AC Connection Voltage (kV)"
+  },
+  {
+   "fieldname": "col_break_pcs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bms_manufacturer_model",
+   "fieldtype": "Data",
+   "label": "BMS Manufacturer and Model"
+  },
+  {
+   "fieldname": "ems_scada_system",
+   "fieldtype": "Data",
+   "label": "EMS / SCADA System"
+  },
+  {
+   "default": "15",
+   "fieldname": "data_logger_sampling_frequency_mins",
+   "fieldtype": "Int",
+   "label": "Data Logger Sampling Frequency (mins)"
+  },
+  {
+   "fieldname": "section_grid",
+   "fieldtype": "Section Break",
+   "label": "Grid Connection"
+  },
+  {
+   "fieldname": "grid_substation_name",
+   "fieldtype": "Data",
+   "label": "Grid Substation Name"
+  },
+  {
+   "fieldname": "grid_connection_voltage_kv",
+   "fieldtype": "Select",
+   "label": "Grid Connection Voltage (kV)",
+   "options": "\n11\n33\n66"
+  },
+  {
+   "fieldname": "col_break_grid",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_metering",
+   "fieldtype": "Section Break",
+   "label": "Metering"
+  },
+  {
+   "fieldname": "revenue_meter_serial_number",
+   "fieldtype": "Data",
+   "label": "Revenue Meter Serial Number"
+  },
+  {
+   "fieldname": "revenue_meter_accuracy_class",
+   "fieldtype": "Select",
+   "label": "Revenue Meter Accuracy Class",
+   "options": "\nClass 0.2S\nClass 0.5S"
+  },
+  {
+   "fieldname": "revenue_meter_ownership",
+   "fieldtype": "Select",
+   "label": "Revenue Meter Ownership",
+   "options": "\nProject Company\nDISCOM\nThird Party"
+  },
+  {
+   "fieldname": "revenue_meter_calibration_date",
+   "fieldtype": "Date",
+   "label": "Revenue Meter Calibration Date"
+  },
+  {
+   "fieldname": "column_break_q2dl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qp2z",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qcqc",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-21 16:03:42.878751",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "BESS Project",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
