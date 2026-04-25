@@ -80,6 +80,8 @@ def get_solar_farm_projects(**kwargs):
 	offset = int(kwargs.get("offset") or 0)
 
 	filters = {}
+	if kwargs.get("partner"):
+		filters["partner"] = kwargs.get("partner")
 	if kwargs.get("solar_farm_type"):
 		filters["solar_farm_type"] = kwargs.get("solar_farm_type")
 	if kwargs.get("location_state"):
@@ -89,7 +91,7 @@ def get_solar_farm_projects(**kwargs):
 		"Solar Farm Project",
 		filters=filters,
 		fields=[
-			"name", "project_name", "solar_farm_type",
+			"name", "project_name", "solar_farm_type", "partner",
 			"location_state", "location_district",
 			"dc_installed_capacity_mwp", "ac_installed_capacity_mw",
 			"commission_date", "crediting_period_start_date",
@@ -216,6 +218,7 @@ def _build_full_project_response(doc):
 	return {
 		"name": doc.name,
 		"project_name": doc.project_name,
+		"partner": doc.partner,
 		"solar_farm_type": doc.solar_farm_type,
 		"commission_date": str(doc.commission_date) if doc.commission_date else None,
 		"crediting_period_start_date": str(doc.crediting_period_start_date) if doc.crediting_period_start_date else None,

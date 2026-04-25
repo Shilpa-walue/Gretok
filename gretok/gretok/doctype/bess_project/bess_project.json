@@ -6,6 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+"partner",
   "project_name",
   "bess_configuration",
   "coupled_project_reference",
@@ -62,6 +63,14 @@
   "revenue_meter_calibration_date"
  ],
  "fields": [
+    {
+  "fieldname": "partner",
+  "fieldtype": "Link",
+  "label": "Partner",
+  "options": "Partners",
+  "in_list_view": 1,
+  "in_standard_filter": 1
+},
   {
    "bold": 1,
    "fieldname": "project_name",

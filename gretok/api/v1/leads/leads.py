@@ -341,6 +341,7 @@ def _create_solar_farm_project(lead_doc, partner):
 	project_doc = frappe.get_doc({
 		"doctype": "Solar Farm Project",
 		"project_name": lead_doc.project_name or lead_doc.organization_name,
+		"partner": partner.get("name"),
 		# Mandatory fields — set defaults, partner can update later
 		"solar_farm_type": "Ground-Mounted",
 		"commission_date": frappe.utils.today(),
@@ -366,6 +367,7 @@ def _create_bess_project(lead_doc, partner):
 	"""Create a BESS Project from lead data."""
 	project_doc = frappe.get_doc({
 		"doctype": "BESS Project",
+		"partner": partner.get("name"),
 		"project_name": lead_doc.project_name or lead_doc.organization_name,
 		# Mandatory fields — set defaults, partner can update later
 		"bess_configuration": "Standalone Grid-Connected",

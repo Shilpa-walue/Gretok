@@ -92,6 +92,8 @@ def get_bess_projects(**kwargs):
 	offset = int(kwargs.get("offset") or 0)
 
 	filters = {}
+	if kwargs.get("partner"):
+		filters["partner"] = kwargs.get("partner")
 	if kwargs.get("bess_configuration"):
 		filters["bess_configuration"] = kwargs.get("bess_configuration")
 	if kwargs.get("location_state"):

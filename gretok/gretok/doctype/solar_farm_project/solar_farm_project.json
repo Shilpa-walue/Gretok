@@ -6,6 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "partner",
   "project_name",
   "solar_farm_type",
   "commission_date",
@@ -64,6 +65,14 @@
    "label": "Project Name",
    "reqd": 1
   },
+  {
+  "fieldname": "partner",
+  "fieldtype": "Link",
+  "label": "Partner",
+  "options": "Partners",
+  "in_list_view": 1,
+  "in_standard_filter": 1
+},
   {
    "fieldname": "solar_farm_type",
    "fieldtype": "Select",

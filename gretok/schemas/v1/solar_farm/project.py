@@ -1,4 +1,5 @@
 MANDATORY_FIELDS = {
+    "partner": str,
 	"project_name": str,
 	"solar_farm_type": str,
 	"commission_date": str,

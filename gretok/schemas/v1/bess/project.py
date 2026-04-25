@@ -1,4 +1,5 @@
 MANDATORY_FIELDS = {
+    "partner": str,
 	"project_name": str,
 	"bess_configuration": str,
 	"commission_date": str,
