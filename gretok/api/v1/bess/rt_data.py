@@ -10,6 +10,8 @@ from gretok.utils.logger import log_info, log_error
 LOG_TITLE = "BESS RT Data API"
 
 
+# ── CREATE SINGLE ─────────────────────────────────────────────────────────────
+
 @frappe.whitelist()
 def store_bess_rt_data(**kwargs):
 	"""
@@ -47,17 +49,17 @@ def store_bess_rt_data(**kwargs):
 		log_error(LOG_TITLE, "Insert Failed", kwargs, exc=e)
 		return error_response(_("Failed to store BESS RT Data: {0}").format(str(e)), http_status_code=500)
 
-	response_data = _build_rt_response(doc)
-
 	response = success_response(
 		_("BESS RT Data stored successfully"),
-		data={"rt_data": response_data},
+		data={"rt_data": _build_rt_response(doc)},
 	)
 
 	log_info(LOG_TITLE, "Response", response)
 
 	return response
 
+
+# ── CREATE BATCH ──────────────────────────────────────────────────────────────
 
 @frappe.whitelist()
 def store_bess_rt_data_batch(**kwargs):
@@ -111,7 +113,7 @@ def store_bess_rt_data_batch(**kwargs):
 
 	frappe.db.commit()
 
-	response = success_response(
+	return success_response(
 		_("{0} records created, {1} failed").format(len(created), len(errors)),
 		data={
 			"created_count": len(created),
@@ -121,10 +123,87 @@ def store_bess_rt_data_batch(**kwargs):
 		},
 	)
 
-	log_info(LOG_TITLE, "Batch Response", response)
 
-	return response
+# ── FETCH ALL ─────────────────────────────────────────────────────────────────
 
+@frappe.whitelist()
+def get_bess_rt_data_list(**kwargs):
+	"""
+	Endpoint: GET /api/method/gretok.api.v1.bess.rt_data.get_bess_rt_data_list
+
+	Query Params:
+		project (str): Filter by project ID
+		from_date (str): Filter from datetime
+		to_date (str): Filter to datetime
+		limit (int): Default 20, max 500
+		offset (int): Default 0
+	"""
+	kwargs.pop("cmd", None)
+
+	limit = min(int(kwargs.get("limit") or 20), 500)
+	offset = int(kwargs.get("offset") or 0)
+
+	filters = {}
+	if kwargs.get("project"):
+		filters["project"] = kwargs.get("project")
+	if kwargs.get("from_date"):
+		filters["timestamp"] = [">=", kwargs.get("from_date")]
+	if kwargs.get("to_date"):
+		filters["timestamp"] = ["<=", kwargs.get("to_date")]
+
+	records = frappe.get_all(
+		"BESS RT Data",
+		filters=filters,
+		fields=[
+			"name", "project", "timestamp",
+			"system_operating_mode", "pcs_inverter_status",
+			"battery_soc_pct", "battery_soh_pct",
+			"grid_export_energy_kwh", "active_power_export_kw",
+			"system_availability_flag", "bms_alarm_flag",
+		],
+		limit=limit,
+		start=offset,
+		order_by="timestamp desc",
+	)
+
+	total = frappe.db.count("BESS RT Data", filters=filters)
+
+	return success_response(
+		_("BESS RT Data fetched successfully"),
+		data={
+			"records": records,
+			"total": total,
+			"limit": limit,
+			"offset": offset,
+		},
+	)
+
+
+# ── FETCH SINGLE ──────────────────────────────────────────────────────────────
+
+@frappe.whitelist()
+def get_bess_rt_data(**kwargs):
+	"""
+	Endpoint: GET /api/method/gretok.api.v1.bess.rt_data.get_bess_rt_data?name=BESSRT-001
+	"""
+	kwargs.pop("cmd", None)
+
+	name = kwargs.get("name")
+	if not name:
+		return error_response(_("name is mandatory"), http_status_code=400)
+
+	if not frappe.db.exists("BESS RT Data", name):
+		return not_found_response(_("BESS RT Data '{0}' does not exist").format(name))
+
+	doc = frappe.get_doc("BESS RT Data", name)
+
+	return success_response(
+		_("BESS RT Data fetched successfully"),
+		data={"rt_data": _build_rt_response(doc)},
+	)
+
+
+# ── HELPERS ───────────────────────────────────────────────────────────────────
 
 def _build_rt_response(doc):
 	return {
@@ -151,4 +230,5 @@ def _build_rt_response(doc):
 		"ambient_temperature_c": doc.ambient_temperature_c,
 		"solar_irradiance_ghi_wm2": doc.solar_irradiance_ghi_wm2,
 		"bms_alarm_flag": doc.bms_alarm_flag,
+		"creation": str(doc.creation),
 	}

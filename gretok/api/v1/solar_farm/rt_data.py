@@ -4,17 +4,17 @@ from frappe import _
 
 from gretok.schemas.v1.solar_farm.rt_data import MANDATORY_FIELDS, OPTIONAL_FIELDS, ALLOWED_VALUES, DEFAULTS
 from gretok.utils.validator import validate_payload
-from gretok.utils.response import success_response, error_response
-from gretok.utils.logger import log_info
+from gretok.utils.response import success_response, error_response, not_found_response
+from gretok.utils.logger import log_info, log_error
 
 LOG_TITLE = "Solar Farm RT Data API"
 
 
+# ── CREATE SINGLE ─────────────────────────────────────────────────────────────
+
 @frappe.whitelist()
 def store_solar_farm_rt_data(**kwargs):
 	"""
-	API to store a single Solar Farm Real-Time SCADA record (every 15 mins).
-
 	Endpoint: POST /api/method/gretok.api.v1.solar_farm.rt_data.store_solar_farm_rt_data
 	"""
 	kwargs.pop("cmd", None)
@@ -25,13 +25,9 @@ def store_solar_farm_rt_data(**kwargs):
 	if error:
 		return error
 
-	# Check project exists
 	project = kwargs.get("project")
 	if not frappe.db.exists("Solar Farm Project", project):
-		return error_response(
-			_("Solar Farm Project '{0}' does not exist").format(project),
-			http_status_code=404,
-		)
+		return not_found_response(_("Solar Farm Project '{0}' does not exist").format(project))
 
 	doc_data = {"doctype": "Solar Farm RT Data"}
 
@@ -45,9 +41,13 @@ def store_solar_farm_rt_data(**kwargs):
 		elif field in DEFAULTS:
 			doc_data[field] = DEFAULTS[field]
 
-	doc = frappe.get_doc(doc_data)
-	doc.insert(ignore_permissions=True)
-	frappe.db.commit()
+	try:
+		doc = frappe.get_doc(doc_data)
+		doc.insert(ignore_permissions=True)
+		frappe.db.commit()
+	except Exception as e:
+		log_error(LOG_TITLE, "Insert Failed", kwargs, exc=e)
+		return error_response(_("Failed to store Solar Farm RT Data: {0}").format(str(e)), http_status_code=500)
 
 	response_data = _build_rt_response(doc)
 
@@ -61,15 +61,12 @@ def store_solar_farm_rt_data(**kwargs):
 	return response
 
 
+# ── CREATE BATCH ──────────────────────────────────────────────────────────────
+
 @frappe.whitelist()
 def store_solar_farm_rt_data_batch(**kwargs):
 	"""
-	Batch API to store multiple RT SCADA records in one call.
-
 	Endpoint: POST /api/method/gretok.api.v1.solar_farm.rt_data.store_solar_farm_rt_data_batch
-
-	Args:
-		records (list/str): List of RT data objects.
 	"""
 	kwargs.pop("cmd", None)
 
@@ -82,13 +79,9 @@ def store_solar_farm_rt_data_batch(**kwargs):
 
 	log_info(LOG_TITLE, "Batch Incoming", {"count": len(records)})
 
-	# Validate project exists once (assume all records belong to same project)
 	project = records[0].get("project") if records else None
 	if project and not frappe.db.exists("Solar Farm Project", project):
-		return error_response(
-			_("Solar Farm Project '{0}' does not exist").format(project),
-			http_status_code=404,
-		)
+		return not_found_response(_("Solar Farm Project '{0}' does not exist").format(project))
 
 	created = []
 	errors = []
@@ -117,6 +110,7 @@ def store_solar_farm_rt_data_batch(**kwargs):
 			created.append(doc.name)
 
 		except Exception as e:
+			log_error(LOG_TITLE, f"Batch Insert Failed at index {idx}", record, exc=e)
 			errors.append({"index": idx, "timestamp": record.get("timestamp"), "error": str(e)})
 
 	frappe.db.commit()
@@ -136,6 +130,86 @@ def store_solar_farm_rt_data_batch(**kwargs):
 	return response
 
 
+# ── FETCH ALL ─────────────────────────────────────────────────────────────────
+
+@frappe.whitelist()
+def get_solar_farm_rt_data_list(**kwargs):
+	"""
+	Endpoint: GET /api/method/gretok.api.v1.solar_farm.rt_data.get_solar_farm_rt_data_list
+
+	Query Params:
+		project (str): Filter by project ID
+		from_date (str): Filter from datetime e.g. 2024-03-15 08:00:00
+		to_date (str): Filter to datetime
+		limit (int): Default 20
+		offset (int): Default 0
+	"""
+	kwargs.pop("cmd", None)
+
+	limit = min(int(kwargs.get("limit") or 20), 500)
+	offset = int(kwargs.get("offset") or 0)
+
+	filters = {}
+	if kwargs.get("project"):
+		filters["project"] = kwargs.get("project")
+	if kwargs.get("from_date"):
+		filters["timestamp"] = [">=", kwargs.get("from_date")]
+	if kwargs.get("to_date"):
+		filters["timestamp"] = ["<=", kwargs.get("to_date")]
+
+	records = frappe.get_all(
+		"Solar Farm RT Data",
+		filters=filters,
+		fields=[
+			"name", "project", "timestamp", "inverter_status",
+			"active_power_generation_kw", "energy_generated_interval_kwh",
+			"active_power_export_kw", "solar_irradiance_ghi_wm2",
+			"ambient_temperature_c", "grid_availability_flag",
+		],
+		limit=limit,
+		start=offset,
+		order_by="timestamp desc",
+	)
+
+	total = frappe.db.count("Solar Farm RT Data", filters=filters)
+
+	return success_response(
+		_("Solar Farm RT Data fetched successfully"),
+		data={
+			"records": records,
+			"total": total,
+			"limit": limit,
+			"offset": offset,
+		},
+	)
+
+
+# ── FETCH SINGLE ──────────────────────────────────────────────────────────────
+
+@frappe.whitelist()
+def get_solar_farm_rt_data(**kwargs):
+	"""
+	Endpoint: GET /api/method/gretok.api.v1.solar_farm.rt_data.get_solar_farm_rt_data?name=SFRT-2024-03-15-001
+	"""
+	kwargs.pop("cmd", None)
+
+	name = kwargs.get("name")
+	if not name:
+		return error_response(_("name is mandatory"), http_status_code=400)
+
+	if not frappe.db.exists("Solar Farm RT Data", name):
+		return not_found_response(_("Solar Farm RT Data '{0}' does not exist").format(name))
+
+	doc = frappe.get_doc("Solar Farm RT Data", name)
+
+	return success_response(
+		_("Solar Farm RT Data fetched successfully"),
+		data={"rt_data": _build_rt_response(doc)},
+	)
+
+
+# ── HELPERS ───────────────────────────────────────────────────────────────────
+
 def _build_rt_response(doc):
 	return {
 		"name": doc.name,
@@ -150,4 +224,5 @@ def _build_rt_response(doc):
 		"solar_irradiance_ghi_wm2": doc.solar_irradiance_ghi_wm2,
 		"module_temperature_c": doc.module_temperature_c,
 		"ambient_temperature_c": doc.ambient_temperature_c,
+		"creation": str(doc.creation),
 	}
