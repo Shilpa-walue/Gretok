@@ -8,6 +8,103 @@ from gretok.utils.logger import log_info, log_error
 
 LOG_TITLE = "Partners API"
 
+# ── FETCH ALL PROJECTS BY PARTNER ─────────────────────────────────────────────
+
+@frappe.whitelist()
+def get_partner_projects(**kwargs):
+	"""
+	Fetch all projects (Solar Farm + BESS) belonging to a partner.
+
+	Endpoint: GET /api/method/gretok.api.v1.partners.partners.get_partner_projects?partner=PRT-0001
+
+	Query Params:
+		partner (str): Mandatory - Partner ID
+		project_type (str): Optional - "Solar Farm" or "BESS"
+		limit (int): Default 20
+		offset (int): Default 0
+	"""
+	kwargs.pop("cmd", None)
+
+	log_info(LOG_TITLE, "Get Partner Projects Request", kwargs)
+
+	partner = kwargs.get("partner")
+	if not partner:
+		return error_response(_("partner is mandatory"), http_status_code=400)
+
+	if not frappe.db.exists("Partners", partner):
+		return not_found_response(_("Partner '{0}' does not exist").format(partner))
+
+	limit = min(int(kwargs.get("limit") or 20), 100)
+	offset = int(kwargs.get("offset") or 0)
+	project_type = kwargs.get("project_type")
+
+	solar_farm_projects = []
+	bess_projects = []
+
+	# Fetch Solar Farm Projects
+	if not project_type or project_type == "Solar Farm":
+		solar_farm_projects = frappe.get_all(
+			"Solar Farm Project",
+			filters={"partner": partner},
+			fields=[
+				"name", "project_name", "solar_farm_type",
+				"location_state", "location_district",
+				"dc_installed_capacity_mwp", "ac_installed_capacity_mw",
+				"commission_date", "crediting_period_start_date",
+				"crediting_period_end_date", "grid_connection_type",
+				"panel_technology", "creation", "modified",
+			],
+			order_by="creation desc",
+		)
+		for p in solar_farm_projects:
+			p["project_type"] = "Solar Farm"
+
+	# Fetch BESS Projects
+	if not project_type or project_type == "BESS":
+		bess_projects = frappe.get_all(
+			"BESS Project",
+			filters={"partner": partner},
+			fields=[
+				"name", "project_name", "bess_configuration",
+				"battery_technology", "rated_energy_capacity_kwh",
+				"rated_power_output_kw", "location_state", "location_district",
+				"commission_date", "crediting_period_start_date",
+				"crediting_period_end_date", "bess_operating_mode",
+				"creation", "modified",
+			],
+			order_by="creation desc",
+		)
+		for p in bess_projects:
+			p["project_type"] = "BESS"
+
+	# Merge and sort by creation desc
+	all_projects = solar_farm_projects + bess_projects
+	all_projects.sort(key=lambda x: str(x.get("creation") or ""), reverse=True)
+
+	# Apply pagination after merge
+	paginated = all_projects[offset: offset + limit]
+
+	total_solar = len(solar_farm_projects)
+	total_bess = len(bess_projects)
+	total = total_solar + total_bess
+
+	response = success_response(
+		_("Projects fetched successfully for partner '{0}'").format(partner),
+		data={
+			"partner": partner,
+			"projects": paginated,
+			"total": total,
+			"total_solar_farm": total_solar,
+			"total_bess": total_bess,
+			"limit": limit,
+			"offset": offset,
+		},
+	)
+
+	log_info(LOG_TITLE, "Get Partner Projects Response", response)
+
+	return response
+
 
 # ── CREATE ────────────────────────────────────────────────────────────────────
 
