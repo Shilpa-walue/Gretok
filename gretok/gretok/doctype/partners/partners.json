@@ -9,45 +9,142 @@
   "section_break_jjm4",
   "naming_series",
   "organization_name",
+  "company_legal_name",
+  "company_registration_number",
+  "company_type",
+  "country_of_registration",
+  "state_of_registration",
+  "column_break_s5w0",
   "email_id",
   "phone_number",
+  "company_gst",
+  "company_pan",
+  "asset_category",
+  "registered_office_address",
+  "section_contact",
+  "primary_contact_name",
+  "primary_contact_email",
+  "column_break_5vbg",
+  "primary_contact_phone",
+  "section_tokens",
   "total_partner_tokens",
   "carbon_credits",
   "wallet_address",
-  "column_break_s5w0",
   "gtka",
+  "column_break_tokens",
   "gtk",
   "gtkcc",
   "gtkgp",
-  "total_carbon_saved",
-  "asset_category",
-  "company_gst",
-  "company_pan"
+  "total_carbon_saved"
  ],
  "fields": [
   {
    "fieldname": "section_break_jjm4",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Company Information"
   },
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Data",
-   "label": "Naming Series"
-  },
+  "fieldname": "naming_series",
+  "fieldtype": "Select",
+  "label": "Naming Series",
+  "options": "PRT-.####",
+  "reqd": 1,
+  "set_only_once": 1
+},
   {
+   "bold": 1,
    "fieldname": "organization_name",
    "fieldtype": "Data",
-   "label": "Organization Name"
+   "in_list_view": 1,
+   "label": "Organization Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company_legal_name",
+   "fieldtype": "Data",
+   "label": "Company Legal Name"
+  },
+  {
+   "fieldname": "company_registration_number",
+   "fieldtype": "Data",
+   "label": "Company Registration Number"
+  },
+  {
+   "fieldname": "company_type",
+   "fieldtype": "Select",
+   "label": "Company Type",
+   "options": "\nIndependent Power Producer (IPP)\nCorporate (Captive)\nProject Developer\nEPC Contractor"
+  },
+  {
+   "fieldname": "country_of_registration",
+   "fieldtype": "Data",
+   "label": "Country of Registration"
+  },
+  {
+   "fieldname": "state_of_registration",
+   "fieldtype": "Data",
+   "label": "State / Province of Registration"
+  },
+  {
+   "fieldname": "registered_office_address",
+   "fieldtype": "Small Text",
+   "label": "Registered Office Address"
+  },
+  {
+   "fieldname": "column_break_s5w0",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "email_id",
    "fieldtype": "Data",
-   "label": "Email Id"
+   "in_list_view": 1,
+   "label": "Email Id",
+   "reqd": 1
   },
   {
    "fieldname": "phone_number",
    "fieldtype": "Data",
    "label": "Phone Number"
+  },
+  {
+   "fieldname": "company_gst",
+   "fieldtype": "Data",
+   "label": "Company GST"
+  },
+  {
+   "fieldname": "company_pan",
+   "fieldtype": "Data",
+   "label": "Company PAN"
+  },
+  {
+   "fieldname": "asset_category",
+   "fieldtype": "Data",
+   "label": "Asset Category"
+  },
+  {
+   "fieldname": "section_contact",
+   "fieldtype": "Section Break",
+   "label": "Primary Contact"
+  },
+  {
+   "fieldname": "primary_contact_name",
+   "fieldtype": "Data",
+   "label": "Primary Contact Name"
+  },
+  {
+   "fieldname": "primary_contact_email",
+   "fieldtype": "Data",
+   "label": "Primary Contact Email"
+  },
+  {
+   "fieldname": "primary_contact_phone",
+   "fieldtype": "Data",
+   "label": "Primary Contact Phone"
+  },
+  {
+   "fieldname": "section_tokens",
+   "fieldtype": "Section Break",
+   "label": "Tokens and Credits"
   },
   {
    "fieldname": "total_partner_tokens",
@@ -60,13 +157,13 @@
    "label": "Carbon Credits"
   },
   {
-   "fieldname": "column_break_s5w0",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "wallet_address",
    "fieldtype": "Data",
    "label": "Wallet Address"
+  },
+  {
+   "fieldname": "column_break_tokens",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "gtka",
@@ -94,25 +191,14 @@
    "label": "Total Carbon Saved"
   },
   {
-   "fieldname": "asset_category",
-   "fieldtype": "Data",
-   "label": "Asset Category"
-  },
-  {
-   "fieldname": "company_gst",
-   "fieldtype": "Data",
-   "label": "Company GST"
-  },
-  {
-   "fieldname": "company_pan",
-   "fieldtype": "Data",
-   "label": "Company PAN"
+   "fieldname": "column_break_5vbg",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-20 18:05:29.505392",
+ "modified": "2026-04-25 15:00:13.886891",
  "modified_by": "Administrator",
  "module": "Gretok",
  "name": "Partners",

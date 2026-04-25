@@ -12,9 +12,9 @@
   "email_id",
   "phone_number",
   "status",
-  "section_break_eixd",
   "project_name",
   "project_description",
+  "section_break_eixd",
   "project_type",
   "project_specfic_data",
   "asset_category",
@@ -27,10 +27,13 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Data",
-   "label": "Naming Series"
-  },
+  "fieldname": "naming_series",
+  "fieldtype": "Select",
+  "label": "Naming Series",
+  "options": "LEAD-.####",
+  "reqd": 1,
+  "set_only_once": 1
+},
   {
    "fieldname": "organization_name",
    "fieldtype": "Data",
@@ -95,7 +98,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-20 18:04:35.783317",
+ "modified": "2026-04-25 15:15:36.427147",
  "modified_by": "Administrator",
  "module": "Gretok",
  "name": "Leads",
