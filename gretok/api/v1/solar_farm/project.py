@@ -65,15 +65,6 @@ def store_solar_farm_project(**kwargs):
 
 @frappe.whitelist()
 def get_solar_farm_projects(**kwargs):
-	"""
-	Endpoint: GET /api/method/gretok.api.v1.solar_farm.project.get_solar_farm_projects
-
-	Query Params:
-		limit (int): Default 20, max 100
-		offset (int): Default 0
-		solar_farm_type (str): Filter by type
-		location_state (str): Filter by state
-	"""
 	kwargs.pop("cmd", None)
 
 	limit = min(int(kwargs.get("limit") or 20), 100)
@@ -87,7 +78,8 @@ def get_solar_farm_projects(**kwargs):
 	if kwargs.get("location_state"):
 		filters["location_state"] = kwargs.get("location_state")
 
-		project_names = frappe.get_all(
+	# ✅ FIX: This must be OUTSIDE the if block
+	project_names = frappe.get_all(
 		"Solar Farm Project",
 		filters=filters,
 		pluck="name",
@@ -101,18 +93,17 @@ def get_solar_farm_projects(**kwargs):
 		doc = frappe.get_doc("Solar Farm Project", name)
 		projects.append(_build_full_project_response(doc))
 
-		total = frappe.db.count("Solar Farm Project", filters=filters)
+	total = frappe.db.count("Solar Farm Project", filters=filters)
 
-		return success_response(
-			_("Solar Farm Projects fetched successfully"),
-			data={
-				"projects": projects,
-				"total": total,
-				"limit": limit,
-				"offset": offset,
-			},
-		)
-
+	return success_response(
+		_("Solar Farm Projects fetched successfully"),
+		data={
+			"projects": projects,
+			"total": total,
+			"limit": limit,
+			"offset": offset,
+		},
+	)
 
 # ── FETCH SINGLE ──────────────────────────────────────────────────────────────
 
