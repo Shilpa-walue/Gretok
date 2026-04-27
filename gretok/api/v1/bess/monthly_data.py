@@ -113,15 +113,7 @@ def get_bess_monthly_data_list(**kwargs):
 	records = frappe.get_all(
 		"BESS Monthly Data",
 		filters=filters,
-		fields=[
-			"name", "project", "reporting_month",
-			"total_energy_discharged_to_grid_kwh",
-			"actual_round_trip_efficiency_pct",
-			"number_of_full_equivalent_cycles",
-			"average_state_of_health_pct",
-			"system_availability_pct",
-			"creation", "modified",
-		],
+		fields=["*"],
 		limit=limit,
 		start=offset,
 		order_by="reporting_month desc",

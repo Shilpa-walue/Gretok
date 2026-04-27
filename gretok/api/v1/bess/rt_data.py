@@ -154,13 +154,7 @@ def get_bess_rt_data_list(**kwargs):
 	records = frappe.get_all(
 		"BESS RT Data",
 		filters=filters,
-		fields=[
-			"name", "project", "timestamp",
-			"system_operating_mode", "pcs_inverter_status",
-			"battery_soc_pct", "battery_soh_pct",
-			"grid_export_energy_kwh", "active_power_export_kw",
-			"system_availability_flag", "bms_alarm_flag",
-		],
+		fields=["*"],
 		limit=limit,
 		start=offset,
 		order_by="timestamp desc",
