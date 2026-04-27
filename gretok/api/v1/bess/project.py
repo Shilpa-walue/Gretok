@@ -76,16 +76,6 @@ def store_bess_project(**kwargs):
 
 @frappe.whitelist()
 def get_bess_projects(**kwargs):
-	"""
-	Endpoint: GET /api/method/gretok.api.v1.bess.project.get_bess_projects
-
-	Query Params:
-		limit (int): Default 20
-		offset (int): Default 0
-		bess_configuration (str): Filter by configuration
-		location_state (str): Filter by state
-		battery_technology (str): Filter by technology
-	"""
 	kwargs.pop("cmd", None)
 
 	limit = min(int(kwargs.get("limit") or 20), 100)
@@ -101,26 +91,28 @@ def get_bess_projects(**kwargs):
 	if kwargs.get("battery_technology"):
 		filters["battery_technology"] = kwargs.get("battery_technology")
 
-	projects = frappe.get_all(
+	# ✅ Step 1: get IDs
+	names = frappe.get_all(
 		"BESS Project",
 		filters=filters,
-		fields=[
-			"name", "project_name", "bess_configuration",
-			"battery_technology", "rated_energy_capacity_kwh",
-			"rated_power_output_kw", "location_state", "location_district",
-			"commission_date", "bess_operating_mode", "creation", "modified",
-		],
+		pluck="name",
 		limit=limit,
 		start=offset,
-		order_by="creation desc",
+		order_by="creation desc"
 	)
+
+	# ✅ Step 2: full data build
+	full_projects = []
+	for name in names:
+		doc = frappe.get_doc("BESS Project", name)
+		full_projects.append(_build_full_project_response(doc))
 
 	total = frappe.db.count("BESS Project", filters=filters)
 
 	return success_response(
 		_("BESS Projects fetched successfully"),
 		data={
-			"projects": projects,
+			"projects": full_projects,   
 			"total": total,
 			"limit": limit,
 			"offset": offset,
