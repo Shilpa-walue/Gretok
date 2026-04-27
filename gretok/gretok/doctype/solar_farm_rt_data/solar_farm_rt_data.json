@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "SF-RT-001",
+ "autoname": "SF-RT-.###",
  "creation": "2026-04-20 21:39:14.325775",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -132,7 +132,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-20 23:15:23.244413",
+ "modified": "2026-04-27 13:03:45.964946",
  "modified_by": "Administrator",
  "module": "Gretok",
  "name": "Solar Farm RT Data",

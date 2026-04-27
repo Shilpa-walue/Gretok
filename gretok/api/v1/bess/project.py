@@ -58,7 +58,7 @@ def store_bess_project(**kwargs):
 		log_error(LOG_TITLE, "Insert Failed", kwargs, exc=e)
 		return error_response(_("Failed to create BESS Project: {0}").format(str(e)), http_status_code=500)
 
-	response_data = _build_project_response(doc)
+	response_data = doc.as_dict()
 
 	frappe.publish_realtime("bess_project_created", response_data, after_commit=True)
 
@@ -148,7 +148,7 @@ def get_bess_project(**kwargs):
 
 	return success_response(
 		_("BESS Project fetched successfully"),
-		data={"project": _build_full_project_response(doc)},
+		data={"project": doc.as_dict()},
 	)
 
 
@@ -190,7 +190,7 @@ def update_bess_project(**kwargs):
 
 	response = success_response(
 		_("BESS Project updated successfully"),
-		data={"project": _build_full_project_response(doc)},
+		data={"project": doc.as_dict()},
 	)
 
 	log_info(LOG_TITLE, "Update Response", response)
