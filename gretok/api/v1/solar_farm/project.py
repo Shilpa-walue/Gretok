@@ -87,33 +87,31 @@ def get_solar_farm_projects(**kwargs):
 	if kwargs.get("location_state"):
 		filters["location_state"] = kwargs.get("location_state")
 
-	projects = frappe.get_all(
+		project_names = frappe.get_all(
 		"Solar Farm Project",
 		filters=filters,
-		fields=[
-			"name", "project_name", "solar_farm_type", "partner",
-			"location_state", "location_district",
-			"dc_installed_capacity_mwp", "ac_installed_capacity_mw",
-			"commission_date", "crediting_period_start_date",
-			"crediting_period_end_date", "grid_connection_type",
-			"panel_technology", "inverter_type", "creation", "modified",
-		],
+		pluck="name",
 		limit=limit,
 		start=offset,
 		order_by="creation desc",
 	)
 
-	total = frappe.db.count("Solar Farm Project", filters=filters)
+	projects = []
+	for name in project_names:
+		doc = frappe.get_doc("Solar Farm Project", name)
+		projects.append(_build_full_project_response(doc))
 
-	return success_response(
-		_("Solar Farm Projects fetched successfully"),
-		data={
-			"projects": projects,
-			"total": total,
-			"limit": limit,
-			"offset": offset,
-		},
-	)
+		total = frappe.db.count("Solar Farm Project", filters=filters)
+
+		return success_response(
+			_("Solar Farm Projects fetched successfully"),
+			data={
+				"projects": projects,
+				"total": total,
+				"limit": limit,
+				"offset": offset,
+			},
+		)
 
 
 # ── FETCH SINGLE ──────────────────────────────────────────────────────────────
