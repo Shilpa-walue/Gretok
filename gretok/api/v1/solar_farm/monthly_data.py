@@ -96,31 +96,31 @@ def get_solar_farm_monthly_data_list(**kwargs):
 	if kwargs.get("project"):
 		filters["project"] = kwargs.get("project")
 
-	records = frappe.get_all(
-		"Solar Farm Monthly Data",
-		filters=filters,
-		fields=[
-			"name", "project", "reporting_month",
-			"gross_energy_generated_kwh", "net_energy_exported_kwh",
-			"auxiliary_consumption_kwh", "system_availability",
-			"plant_operational_days", "creation", "modified",
-		],
-		limit=limit,
-		start=offset,
-		order_by="reporting_month desc",
-	)
+	record_names = frappe.get_all(
+    "Solar Farm Monthly Data",
+    filters=filters,
+    pluck="name",
+    limit=limit,
+    start=offset,
+    order_by="reporting_month desc",
+)
 
-	total = frappe.db.count("Solar Farm Monthly Data", filters=filters)
+	records = []
+	for name in record_names:
+		doc = frappe.get_doc("Solar Farm Monthly Data", name)
+		records.append(_build_monthly_response(doc))
 
-	return success_response(
-		_("Solar Farm Monthly Data fetched successfully"),
-		data={
-			"records": records,
-			"total": total,
-			"limit": limit,
-			"offset": offset,
-		},
-	)
+		total = frappe.db.count("Solar Farm Monthly Data", filters=filters)
+
+		return success_response(
+			_("Solar Farm Monthly Data fetched successfully"),
+			data={
+				"records": records,
+				"total": total,
+				"limit": limit,
+				"offset": offset,
+			},
+		)
 
 
 # ── FETCH SINGLE ──────────────────────────────────────────────────────────────
@@ -197,22 +197,37 @@ def _build_monthly_response(doc):
 		"name": doc.name,
 		"project": doc.project,
 		"reporting_month": str(doc.reporting_month) if doc.reporting_month else None,
+
+		# --- Meter readings ---
 		"opening_meter_reading_kwh": doc.opening_meter_reading_kwh,
 		"opening_reading_datetime": str(doc.opening_reading_datetime) if doc.opening_reading_datetime else None,
 		"closing_meter_reading_kwh": doc.closing_meter_reading_kwh,
 		"closing_reading_datetime": str(doc.closing_reading_datetime) if doc.closing_reading_datetime else None,
+
+		# --- Representatives ---
 		"utility_representative_name": doc.utility_representative_name,
 		"company_representative_name": doc.company_representative_name,
+
+		# --- Evidence ---
+		"meter_photo_evidence": doc.meter_photo_evidence,
+
+		# --- Energy ---
 		"gross_energy_generated_kwh": doc.gross_energy_generated_kwh,
 		"net_energy_exported_kwh": doc.net_energy_exported_kwh,
 		"auxiliary_consumption_kwh": doc.auxiliary_consumption_kwh,
 		"grid_curtailment_energy_lost_kwh": doc.grid_curtailment_energy_lost_kwh,
+
+		# --- Operations ---
 		"plant_operational_days": doc.plant_operational_days,
 		"planned_downtime_hours": doc.planned_downtime_hours,
 		"unplanned_downtime_hours": doc.unplanned_downtime_hours,
+
+		# --- Performance ---
 		"actual_performance_ratio": doc.actual_performance_ratio,
 		"actual_capacity_utilization_factor": doc.actual_capacity_utilization_factor,
 		"system_availability": doc.system_availability,
+
+		# --- Meta ---
 		"creation": str(doc.creation),
 		"modified": str(doc.modified),
 	}
