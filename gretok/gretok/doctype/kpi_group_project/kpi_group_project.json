@@ -1,0 +1,335 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-07-22 13:03:02.826474",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "partner",
+  "organisation_name",
+  "reporting_year",
+  "base_year",
+  "previous_year_report",
+  "section_scope_totals",
+  "scope_1_tco2e",
+  "scope_2_tco2e",
+  "scope_3_tco2e",
+  "col_break_scope",
+  "total_gross_emissions_tco2e",
+  "ghg_trades_tco2e",
+  "total_net_emissions_tco2e",
+  "section_ghg_protocol",
+  "scope3_cat1_purchased_goods_tco2e",
+  "scope3_cat2_capital_goods_tco2e",
+  "scope3_cat3_fuel_energy_tco2e",
+  "scope3_cat4_upstream_transport_tco2e",
+  "scope3_cat5_waste_tco2e",
+  "scope3_cat6_business_travel_tco2e",
+  "scope3_cat7_employee_commute_tco2e",
+  "scope3_cat8_upstream_leased_tco2e",
+  "col_break_ghg",
+  "scope3_cat9_downstream_transport_tco2e",
+  "scope3_cat10_processing_sold_tco2e",
+  "scope3_cat11_use_sold_tco2e",
+  "scope3_cat12_end_of_life_tco2e",
+  "scope3_cat13_downstream_leased_tco2e",
+  "scope3_cat14_franchises_tco2e",
+  "scope3_cat15_investments_tco2e",
+  "section_intensity",
+  "intensity_metric",
+  "intensity_unit",
+  "base_year_intensity",
+  "col_break_intensity",
+  "previous_year_gross_intensity",
+  "previous_year_net_intensity",
+  "current_year_gross_intensity",
+  "current_year_net_intensity"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "KPIP-.####",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "partner",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Partner",
+   "options": "Partners",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organisation_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organisation Name",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "reporting_year",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Reporting Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "base_year",
+   "fieldtype": "Data",
+   "label": "Base Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "previous_year_report",
+   "fieldtype": "Link",
+   "label": "Previous Year Report",
+   "options": "KPI Group Project"
+  },
+  {
+   "fieldname": "section_scope_totals",
+   "fieldtype": "Section Break",
+   "label": "Scope Totals"
+  },
+  {
+   "fieldname": "scope_1_tco2e",
+   "fieldtype": "Float",
+   "label": "Scope 1 - Direct Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope_2_tco2e",
+   "fieldtype": "Float",
+   "label": "Scope 2 - Indirect Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope_3_tco2e",
+   "fieldtype": "Float",
+   "label": "Scope 3 - Value Chain Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_scope",
+   "fieldtype": "Column Break"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_gross_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Total Gross Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "ghg_trades_tco2e",
+   "fieldtype": "Float",
+   "label": "GHG Trades (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "bold": 1,
+   "fieldname": "total_net_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Total Net Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "section_ghg_protocol",
+   "fieldtype": "Section Break",
+   "label": "GHG Protocol Summary"
+  },
+  {
+   "fieldname": "scope3_cat1_purchased_goods_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 1 - Purchased Goods and Services (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat2_capital_goods_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 2 - Capital Goods (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat3_fuel_energy_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 3 - Fuel and Energy Related Activities (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat4_upstream_transport_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 4 - Upstream Transportation and Distribution (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat5_waste_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 5 - Waste Generated in Operations (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat6_business_travel_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 6 - Business Travel (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat7_employee_commute_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 7 - Employee Commuting (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat8_upstream_leased_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 8 - Upstream Leased Assets (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_ghg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scope3_cat9_downstream_transport_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 9 - Downstream Transportation and Distribution (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat10_processing_sold_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 10 - Processing of Sold Products (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat11_use_sold_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 11 - Use of Sold Products (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat12_end_of_life_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 12 - End of Life Treatment of Sold Products (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat13_downstream_leased_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 13 - Downstream Leased Assets (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat14_franchises_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 14 - Franchises (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope3_cat15_investments_tco2e",
+   "fieldtype": "Float",
+   "label": "Cat 15 - Investments (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "section_intensity",
+   "fieldtype": "Section Break",
+   "label": "Intensity Summary"
+  },
+  {
+   "default": "FTE",
+   "fieldname": "intensity_metric",
+   "fieldtype": "Data",
+   "label": "Intensity Metric"
+  },
+  {
+   "default": "tCO2-e/FTE",
+   "fieldname": "intensity_unit",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "base_year_intensity",
+   "fieldtype": "Float",
+   "label": "Base Year Emissions Intensity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_intensity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "previous_year_gross_intensity",
+   "fieldtype": "Float",
+   "label": "Previous Year Gross Emissions Intensity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "previous_year_net_intensity",
+   "fieldtype": "Float",
+   "label": "Previous Year Net Emissions Intensity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "current_year_gross_intensity",
+   "fieldtype": "Float",
+   "label": "Current Year Gross Emissions Intensity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "current_year_net_intensity",
+   "fieldtype": "Float",
+   "label": "Current Year Net Emissions Intensity",
+   "precision": "4"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "KPI Category Summary",
+   "link_fieldname": "kpi_project",
+   "label": "Category Summary"
+  },
+  {
+   "link_doctype": "KPI Activity Summary",
+   "link_fieldname": "kpi_project",
+   "label": "Activity Summary"
+  }
+ ],
+ "modified": "2026-07-23 00:21:09.501253",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "KPI Group Project",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

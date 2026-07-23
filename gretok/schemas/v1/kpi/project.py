@@ -1,0 +1,40 @@
+MANDATORY_FIELDS = {
+	"partner": str,
+	"organisation_name": str,
+	"reporting_year": str,
+	"base_year": str,
+}
+
+OPTIONAL_FIELDS = [
+	"previous_year_report",
+	"scope_1_tco2e",
+	"scope_2_tco2e",
+	"scope_3_tco2e",
+	"total_gross_emissions_tco2e",
+	"ghg_trades_tco2e",
+	"total_net_emissions_tco2e",
+	"scope3_cat1_purchased_goods_tco2e",
+	"scope3_cat2_capital_goods_tco2e",
+	"scope3_cat3_fuel_energy_tco2e",
+	"scope3_cat4_upstream_transport_tco2e",
+	"scope3_cat5_waste_tco2e",
+	"scope3_cat6_business_travel_tco2e",
+	"scope3_cat7_employee_commute_tco2e",
+	"scope3_cat8_upstream_leased_tco2e",
+	"scope3_cat9_downstream_transport_tco2e",
+	"scope3_cat10_processing_sold_tco2e",
+	"scope3_cat11_use_sold_tco2e",
+	"scope3_cat12_end_of_life_tco2e",
+	"scope3_cat13_downstream_leased_tco2e",
+	"scope3_cat14_franchises_tco2e",
+	"scope3_cat15_investments_tco2e",
+	"intensity_metric",
+	"intensity_unit",
+	"base_year_intensity",
+	"previous_year_gross_intensity",
+	"previous_year_net_intensity",
+	"current_year_gross_intensity",
+	"current_year_net_intensity",
+]
+
+ALLOWED_VALUES = {}
