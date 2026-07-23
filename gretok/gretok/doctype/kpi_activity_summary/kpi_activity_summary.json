@@ -1,0 +1,322 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-07-22 15:49:41.904801",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "kpi_project",
+  "category",
+  "activity",
+  "unit",
+  "section_activity",
+  "base_year_activity",
+  "previous_year_activity",
+  "previous_year_carbon_neutral_activity",
+  "col_break_activity",
+  "current_year_activity",
+  "current_year_carbon_neutral_activity",
+  "section_activity_change",
+  "change_on_previous_year_activity",
+  "pct_change_on_previous_year_activity",
+  "col_break_activity_change",
+  "change_on_base_year_activity",
+  "pct_change_on_base_year_activity",
+  "section_emissions",
+  "base_year_emissions_tco2e",
+  "previous_year_gross_emissions_tco2e",
+  "previous_year_net_emissions_tco2e",
+  "current_year_gross_emissions_tco2e",
+  "col_break_emissions",
+  "pct_of_total_emissions",
+  "scope_1_tco2e",
+  "scope_2_tco2e",
+  "scope_3_tco2e",
+  "section_current_year",
+  "ghg_trades_tco2e",
+  "current_year_net_emissions_tco2e",
+  "col_break_current_year",
+  "gross_change_on_previous_year_emissions",
+  "pct_gross_change_on_previous_year_emissions",
+  "net_change_on_previous_year_emissions",
+  "pct_net_change_on_previous_year_emissions",
+  "section_base_year",
+  "change_on_base_year_emissions",
+  "pct_change_on_base_year_emissions",
+  "col_break_base_year",
+  "comments"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "KPIACT-.####",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "kpi_project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "KPI Group Project",
+   "options": "KPI Group Project",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Category",
+   "reqd": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "activity",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Activity",
+   "reqd": 1
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "label": "Unit"
+  },
+  {
+   "fieldname": "section_activity",
+   "fieldtype": "Section Break",
+   "label": "Activity Data"
+  },
+  {
+   "fieldname": "base_year_activity",
+   "fieldtype": "Float",
+   "label": "Base Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "previous_year_activity",
+   "fieldtype": "Float",
+   "label": "Previous Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "previous_year_carbon_neutral_activity",
+   "fieldtype": "Float",
+   "label": "Previous Year Carbon Neutral Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_activity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_year_activity",
+   "fieldtype": "Float",
+   "label": "Current Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "current_year_carbon_neutral_activity",
+   "fieldtype": "Float",
+   "label": "Current Year Carbon Neutral Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "section_activity_change",
+   "fieldtype": "Section Break",
+   "label": "Activity Change"
+  },
+  {
+   "fieldname": "change_on_previous_year_activity",
+   "fieldtype": "Float",
+   "label": "Change on Previous Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "pct_change_on_previous_year_activity",
+   "fieldtype": "Float",
+   "label": "% Change on Previous Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_activity_change",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "change_on_base_year_activity",
+   "fieldtype": "Float",
+   "label": "Change on Base Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "pct_change_on_base_year_activity",
+   "fieldtype": "Float",
+   "label": "% Change on Base Year Activity",
+   "precision": "4"
+  },
+  {
+   "fieldname": "section_emissions",
+   "fieldtype": "Section Break",
+   "label": "Emissions Data"
+  },
+  {
+   "fieldname": "base_year_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Base Year Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "previous_year_gross_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Previous Year Gross Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "previous_year_net_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Previous Year Net Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "current_year_gross_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Current Year Gross Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_emissions",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pct_of_total_emissions",
+   "fieldtype": "Float",
+   "label": "% of Total Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope_1_tco2e",
+   "fieldtype": "Float",
+   "label": "Scope 1 (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope_2_tco2e",
+   "fieldtype": "Float",
+   "label": "Scope 2 (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "scope_3_tco2e",
+   "fieldtype": "Float",
+   "label": "Scope 3 (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "section_current_year",
+   "fieldtype": "Section Break",
+   "label": "Current Year vs Previous Year Emissions"
+  },
+  {
+   "fieldname": "ghg_trades_tco2e",
+   "fieldtype": "Float",
+   "label": "GHG Trades (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "current_year_net_emissions_tco2e",
+   "fieldtype": "Float",
+   "label": "Current Year Net Emissions (tCO2-e)",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_current_year",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gross_change_on_previous_year_emissions",
+   "fieldtype": "Float",
+   "label": "Gross Change on Previous Year Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "pct_gross_change_on_previous_year_emissions",
+   "fieldtype": "Float",
+   "label": "% Gross Change on Previous Year Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "net_change_on_previous_year_emissions",
+   "fieldtype": "Float",
+   "label": "Net Change on Previous Year Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "pct_net_change_on_previous_year_emissions",
+   "fieldtype": "Float",
+   "label": "% Net Change on Previous Year Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "section_base_year",
+   "fieldtype": "Section Break",
+   "label": "Current Year vs Base Year Emissions"
+  },
+  {
+   "fieldname": "change_on_base_year_emissions",
+   "fieldtype": "Float",
+   "label": "Change on Base Year Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "pct_change_on_base_year_emissions",
+   "fieldtype": "Float",
+   "label": "% Change on Base Year Emissions",
+   "precision": "4"
+  },
+  {
+   "fieldname": "col_break_base_year",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-23 12:47:30.159292",
+ "modified_by": "Administrator",
+ "module": "Gretok",
+ "name": "KPI Activity Summary",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
