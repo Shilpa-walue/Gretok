@@ -89,3 +89,38 @@ def login(**kwargs):
 			"OTP sent successfully to your email.",
 			data={"email": email, "action_required": "verify_otp"}
 		)
+
+@frappe.whitelist()
+def get_user_profile():
+	"""
+	Endpoint: GET /api/method/gretok.api.v1.auth.get_user_profile
+	
+	Returns the logged in user's profile details and role (admin or client).
+	Requires an Authentication token header.
+	"""
+	user_email = frappe.session.user
+	
+	if user_email == "Guest":
+		return error_response("Not logged in or invalid token", http_status_code=401)
+	
+	user = frappe.get_doc("User", user_email)
+	
+	# Extract user roles
+	roles = [r.role for r in user.roles]
+	
+	# Determine frontend role
+	# If they have high-level access in Frappe, they are an admin
+	frontend_role = "client"
+	if "System Manager" in roles or "Administrator" in roles or "Gretok Admin" in roles:
+		frontend_role = "admin"
+
+	return success_response(
+		"User profile fetched successfully",
+		data={
+			"email": user.email,
+			"name": user.full_name,
+			"role": frontend_role,
+			"all_roles": roles,
+			"mobile_no": user.mobile_no
+		}
+	)
