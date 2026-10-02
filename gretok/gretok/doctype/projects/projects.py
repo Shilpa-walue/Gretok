@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class GretokProject(Document):
+class Projects(Document):
 	pass
