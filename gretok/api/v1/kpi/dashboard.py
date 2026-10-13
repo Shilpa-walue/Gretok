@@ -215,6 +215,13 @@ def _build_fy2026_projected_line_items(fy2024_line_items, fy2025_line_items):
 		new_item["net_change_on_previous_year_tco2e"] = change
 		new_item["pct_net_change_on_previous_year"] = round(growth_rate, 6)
 
+		if item.get("scope_1_tco2e") is not None:
+			new_item["scope_1_tco2e"] = round(item["scope_1_tco2e"] * (1 + growth_rate), 6)
+		if item.get("scope_2_tco2e") is not None:
+			new_item["scope_2_tco2e"] = round(item["scope_2_tco2e"] * (1 + growth_rate), 6)
+		if item.get("scope_3_tco2e") is not None:
+			new_item["scope_3_tco2e"] = round(item["scope_3_tco2e"] * (1 + growth_rate), 6)
+
 		if item.get("activity") is not None:
 			fy2025_quantity = item.get("activity_quantity")
 			projected_quantity = (
@@ -293,15 +300,19 @@ class DataStore:
 		fy2026_pct_change_yoy = round((fy2026_gross_total - fy2025_gross_total) / fy2025_gross_total, 6)
 		fy2023_gross_total = assessments[_assessment_name(DEFAULT_PROJECT, "FY2023")]["gross_total"]
 
+		scope_1_total = round(sum(i.get("scope_1_tco2e") or 0 for i in fy2026_line_items if i.get("activity") is None), 6)
+		scope_2_total = round(sum(i.get("scope_2_tco2e") or 0 for i in fy2026_line_items if i.get("activity") is None), 6)
+		scope_3_total = round(sum(i.get("scope_3_tco2e") or 0 for i in fy2026_line_items if i.get("activity") is None), 6)
+
 		assessments[name] = {
 			"name": name,
 			"project": DEFAULT_PROJECT,
 			"fiscal_year": "FY2026",
 			"gross_total": fy2026_gross_total,
 			"net_total": fy2026_gross_total,
-			"scope_1_total": None,
-			"scope_2_total": None,
-			"scope_3_total": None,
+			"scope_1_total": scope_1_total if scope_1_total > 0 else None,
+			"scope_2_total": scope_2_total if scope_2_total > 0 else None,
+			"scope_3_total": scope_3_total if scope_3_total > 0 else None,
 			"ghg_trades_total": None,
 			"pct_change_yoy": fy2026_pct_change_yoy,
 			"pct_net_change_yoy": fy2026_pct_change_yoy,
@@ -339,7 +350,91 @@ data_store = DataStore()
 # ANALYTICS ENGINE
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _get_trend_from_db(project: str):
+	if not getattr(frappe, "db", None):
+		return None, None
+	try:
+		filters = {}
+		if frappe.db.exists("KPI Group Project", {"organisation_name": project}):
+			filters = {"organisation_name": project}
+		elif frappe.db.exists("KPI Group Project", {"partner": project}):
+			filters = {"partner": project}
+		elif frappe.db.exists("KPI Group Project", {"name": project}):
+			filters = {"name": project}
+		else:
+			return None, None
+
+		projects = frappe.get_all(
+			"KPI Group Project",
+			filters=filters,
+			fields=[
+				"name", "partner", "organisation_name", "reporting_year", "base_year",
+				"scope_1_tco2e", "scope_2_tco2e", "scope_3_tco2e",
+				"total_gross_emissions_tco2e", "total_net_emissions_tco2e",
+				"current_year_gross_intensity", "current_year_net_intensity"
+			],
+			order_by="reporting_year asc"
+		)
+		if not projects:
+			return None, None
+
+		years = []
+		base_year_gross = projects[0].get("total_gross_emissions_tco2e") or 1.0
+
+		for idx, p in enumerate(projects):
+			gross = p.get("total_gross_emissions_tco2e") or 0.0
+			prior_gross = projects[idx - 1].get("total_gross_emissions_tco2e") if idx > 0 else None
+			yoy = (gross - prior_gross) / prior_gross if (prior_gross and prior_gross > 0) else None
+			base_change = (gross - base_year_gross) / base_year_gross if base_year_gross > 0 else 0
+
+			years.append({
+				"name": p.name,
+				"project": project,
+				"fiscal_year": p.reporting_year,
+				"gross_total": gross,
+				"net_total": p.get("total_net_emissions_tco2e") or gross,
+				"scope_1_total": p.get("scope_1_tco2e"),
+				"scope_2_total": p.get("scope_2_tco2e"),
+				"scope_3_total": p.get("scope_3_tco2e"),
+				"pct_change_yoy": yoy,
+				"pct_change_base_year": base_change,
+				"gross_emissions_intensity": p.get("current_year_gross_intensity"),
+				"net_emissions_intensity": p.get("current_year_net_intensity"),
+				"is_placeholder": False,
+			})
+
+		project_names = [p.name for p in projects]
+		categories = frappe.get_all(
+			"KPI Category Summary",
+			filters={"kpi_project": ["in", project_names]},
+			fields=[
+				"kpi_project", "category", "current_year_gross_emissions_tco2e",
+				"pct_gross_change_on_previous_year", "pct_change_on_base_year",
+				"contribution_to_total_pct"
+			]
+		)
+		project_year_map = {p.name: p.reporting_year for p in projects}
+		category_trend = []
+		for cat in categories:
+			category_trend.append({
+				"fiscal_year": project_year_map.get(cat.kpi_project),
+				"category": cat.category,
+				"emissions_tco2e": cat.current_year_gross_emissions_tco2e,
+				"pct_change_yoy": cat.pct_gross_change_on_previous_year,
+				"pct_change_base_year": cat.pct_change_on_base_year,
+				"contribution_pct": cat.contribution_to_total_pct,
+			})
+
+		return years, category_trend
+	except Exception:
+		return None, None
+
+
 def _get_trend(project: str):
+	db_years, db_categories = _get_trend_from_db(project)
+	if db_years:
+		return db_years, db_categories
+
 	raw_years = data_store.list_for_project(project)
 	raw_years.sort(key=lambda y: y["fiscal_year"])
 
@@ -529,9 +624,9 @@ def get_dashboard_overview(project=DEFAULT_PROJECT, **kwargs):
 				"pct_change_base_year": round(y["pct_change_base_year"], 3) if y.get("pct_change_base_year") is not None else 0,
 				"gross_emissions_intensity": round(y["gross_emissions_intensity"], 2) if y.get("gross_emissions_intensity") is not None else None,
 				"net_emissions_intensity": round(y["net_emissions_intensity"], 2) if y.get("net_emissions_intensity") is not None else None,
-				"scope_1_total": round(y["scope_1_total"], 2) if y.get("scope_1_total") is not None else (520.1 if y["fiscal_year"] == "FY2023" else (610.0 if y["fiscal_year"] == "FY2024" else None)),
-				"scope_2_total": round(y["scope_2_total"], 2) if y.get("scope_2_total") is not None else (890.3 if y["fiscal_year"] == "FY2023" else (920.0 if y["fiscal_year"] == "FY2024" else None)),
-				"scope_3_total": round(y["scope_3_total"], 2) if y.get("scope_3_total") is not None else (1386.8 if y["fiscal_year"] == "FY2023" else (1746.45 if y["fiscal_year"] == "FY2024" else None)),
+				"scope_1_total": round(y["scope_1_total"], 2) if y.get("scope_1_total") is not None else None,
+				"scope_2_total": round(y["scope_2_total"], 2) if y.get("scope_2_total") is not None else None,
+				"scope_3_total": round(y["scope_3_total"], 2) if y.get("scope_3_total") is not None else None,
 				"is_placeholder": y.get("is_placeholder", False),
 			}
 			for y in years
@@ -565,17 +660,11 @@ def get_dashboard_year(project=DEFAULT_PROJECT, fiscal_year="FY2026", **kwargs):
 	all_flagged = _flag_significant_changes(project)
 	flagged_this_year = [f for f in all_flagged if f["fiscal_year"] == fiscal_year]
 
-	# Compute scopes for this year
+	# Compute scopes for this year dynamically
 	detail = _get_category_detail(project, fiscal_year)
 	scope_1 = year_match.get("scope_1_total")
 	scope_2 = year_match.get("scope_2_total")
 	scope_3 = year_match.get("scope_3_total")
-
-	if scope_1 is None and fiscal_year == "FY2026":
-		# Scope totals for projection
-		scope_1 = 750.2
-		scope_2 = 1120.5
-		scope_3 = 2752.81
 
 	response = {
 		"project": project,
